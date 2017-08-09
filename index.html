@@ -1,0 +1,59 @@
+
+<html>
+  <head>
+    <script src="js/jquery.min.js" language="javascript" type="text/javascript"></script>
+    <script src="js/main.js" language="javascript" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/style.min.css"/>
+  </head>
+  <body>
+    <div class="container">   
+      <input id="acq-time" type="number" min="0" step="60"/>
+      <div class="input-text">ACQ Time (s)</div>
+      <select id="sample-rate">
+        <option value="20000000">20MSPS (HackRF One)</option>
+        <option value="10000000">10MSPS (AirSpy)</option>
+        <option value="6000000">6MPS (AirSpy mini)</option>
+        <option value="3000000">3MPS (AirSpy mini)</option>
+        <option value="2500000">2.5MSPS (AirSpy)</option>
+        <option value="2400000">2.4MSPS (RTL-SDR)</option>
+      </select>
+      <div class="input-text">Sample rate</div>
+      <select id="sr-time-series">
+        <option value="1000">1KSPS</option>
+        <option value="2000">2KSPS</option>
+        <option value="4000">4KSPS</option>
+        <option value="8000">8KSPS</option>
+      </select>
+      <div class="input-text">SR Time Series</div>
+      <select id="num-chan">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+      <div class="input-text">Num chan</div>
+      <input id="frequency" type="number" min="0" step="0.1"/>
+      <div class="input-text">Frequency</div>
+      <input id="rf-gain" type="number" min="0" step="0.1"/>
+      <div class="input-text">RF Gain (dB)</div>
+      <input id="if-gain" type="number" min="0" step="0.1"/>
+      <div class="input-text">If Gain (dB)</div>
+      <input id="bb-gain" type="number" min="0" step="0.1"/>
+      <div class="input-text">BB Gain (dB)</div>
+      <input id="dig-gain" type="number" min="0" step="0.1"/>
+      <div class="input-text">DIG Gain</div>
+      <input id="dir-selector" type="file" webkitdirectory="webkitdirectory" style="display:none" onchange="closedFolderSelector()"/>
+      <input id="filename" type="text"/>
+      <div class="input-text">Filename</div>
+      <input type="button" onclick="openFolderSelector()" value="Select folder" class="open-folder"/>
+      <div class="separator"></div>
+      <input id="start-now" type="checkbox"/>
+      <div class="input-text">Start now</div>
+      <input id="start-time" type="text"/>
+      <div class="input-text">Start time</div>
+      <input type="button" onclick="start()" value="Start" class="start-button"/>
+      <div class="input-text"></div>
+      <div id="countdown">00:00:00</div>
+    </div>
+  </body>
+</html>

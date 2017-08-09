@@ -1,0 +1,66 @@
+//output:index.html
+html
+  head
+    script(src='js/jquery.min.js',language="javascript",type="text/javascript")
+    script(src="js/main.js",language="javascript",type="text/javascript")
+    link(rel="stylesheet",href="css/style.min.css")
+  body
+    .container    
+      input#acq-time(type="number",min="0",step="60")
+      .input-text ACQ Time (s)
+      
+      select#sample-rate
+        option(value='20000000') 20MSPS (HackRF One)
+        option(value='10000000') 10MSPS (AirSpy)
+        option(value='6000000') 6MPS (AirSpy mini)
+        option(value='3000000') 3MPS (AirSpy mini)
+        option(value='2500000') 2.5MSPS (AirSpy)
+        option(value='2400000') 2.4MSPS (RTL-SDR)
+      .input-text Sample rate
+      
+      select#sr-time-series
+        option(value='1000') 1KSPS
+        option(value='2000') 2KSPS
+        option(value='4000') 4KSPS
+        option(value='8000') 8KSPS
+      .input-text SR Time Series
+      
+      select#num-chan
+        option(value='10') 10
+        option(value='25') 25
+        option(value='50') 50
+        option(value='100') 100
+      .input-text Num chan
+      
+      input#frequency(type="number",min="0",step="0.1")
+      .input-text Frequency
+      
+      input#rf-gain(type="number",min="0",step="0.1")
+      .input-text RF Gain (dB)
+      
+      input#if-gain(type="number",min="0",step="0.1")
+      .input-text If Gain (dB)
+      
+      input#bb-gain(type="number",min="0",step="0.1")
+      .input-text BB Gain (dB)
+
+      input#dig-gain(type="number",min="0",step="0.1")
+      .input-text DIG Gain
+      
+      input#dir-selector(type="file",webkitdirectory, style="display:none", onchange="closedFolderSelector()")
+      input#filename(type="text")
+      .input-text Filename
+      input.open-folder(type="button",onclick="openFolderSelector()",value="Select folder")
+      
+      .separator
+      
+      input#start-now(type="checkbox")
+      .input-text Start now
+      
+      input#start-time(type="text")
+      .input-text Start time
+      
+      input.start-button(type="button", onclick="start()", value="Start")
+      .input-text
+      
+      #countdown 00:00:00

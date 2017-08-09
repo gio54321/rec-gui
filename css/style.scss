@@ -1,0 +1,63 @@
+*{margin:0; padding:0;}
+
+body{
+  background-color: #bdc3c7;
+}
+
+.container{
+  float:left;
+  height:490px;
+  width:400px;
+  background-color: white;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin:-245px 0 0 -200px;
+  border-radius: 5px;
+}
+
+.container div:first-of-type{
+  margin-top:10px;
+}
+
+input, select{
+  clear:both;
+  float:left;
+  margin:10px 20px 0 10px;
+  height:20px;
+  width:200px;
+}
+
+.input-text{
+  margin-top:10px;
+  height:20px;
+  line-height:20px;
+}
+
+.separator{
+  height:40px;
+}
+
+#start-now{
+  margin-left:190px;
+  width:20px;
+}
+
+#start-now:checked ~ #start-time{
+  opacity:0.3;
+  border:1px solid rgba(0,0,0,0.3)
+}
+
+#start-now:checked ~ #start-time + .input-text{
+  opacity:0.3;
+}
+
+#countdown{
+  height:40px;
+  line-height:40px;
+  text-align: center;
+  font-size:30px;
+  width:380px;
+  margin:10px auto 0 auto;
+  border:1px solid black;
+}

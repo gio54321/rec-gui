@@ -1,0 +1,16 @@
+<default>
+  <acq-time>3600</acq-time>
+  <sample-rate>1</sample-rate>
+  <sr-time-series>1</sr-time-series>
+  <num-chan>1</num-chan>
+  <frequency>420</frequency>
+  <rf-gain>18</rf-gain>
+  <if-gain>12</if-gain>
+  <bb-gain>0</bb-gain>
+  <dig-gain>2</dig-gain>
+  <filename></filename>
+  <start-now>true</start-now>
+  <start-time></start-time>
+
+  <recorder-path>/</recorder-path>
+</default>
