@@ -81,7 +81,7 @@ function start(){
     if(document.getElementById("start-now").checked){
       var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
       var decimation = fftSize / document.getElementById("num-chan").value
-      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py" +
+      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py " +
         document.getElementById("acq-time").value + " " +
         document.getElementById("sample-rate").value + " " +
         document.getElementById("frequency").value + " " +
@@ -96,9 +96,11 @@ function start(){
     }
     else{
       countdownSeconds = parseInt((Date.parse(document.getElementById("start-time").value) - Date.parse(new Date().toLocaleString()))/1000);
-      intervalId = setInterval(countdown, 1000);
-      document.getElementsByClassName("start-button")[0].value = "stop";
-      countdownIsRunning = true;
+      if(countdownSeconds <=0){
+        intervalId = setInterval(countdown, 1000);
+        document.getElementsByClassName("start-button")[0].value = "stop";
+        countdownIsRunning = true;
+      }else{alert("wrong start time!")}
     }
   }
 
@@ -107,10 +109,12 @@ function start(){
 function countdown(){
   if(countdownSeconds == 0){
     clearInterval(intervalId);
+    document.getElementsByClassName("start-button")[0].value = "start";
+    countdownIsRunning = false;
     if(controlData()){
       var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
       var decimation = fftSize / document.getElementById("num-chan").value
-      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py" +
+      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py " +
         document.getElementById("acq-time").value + " " +
         document.getElementById("sample-rate").value + " " +
         document.getElementById("frequency").value + " " +
