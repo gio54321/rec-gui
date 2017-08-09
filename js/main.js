@@ -40,7 +40,7 @@ function openFolderSelector(){
 function closedFolderSelector(){
   try{
     filePath = document.getElementById("dir-selector").files[0].path;
-    filePath += "\\filename.bin";
+    filePath += "/filename.bin";
     document.getElementById("filename").value = filePath;
     document.getElementById("filename").focus();
     document.getElementById("filename").setSelectionRange(filePath.length, filePath.length);
@@ -81,7 +81,7 @@ function start(){
     if(document.getElementById("start-now").checked){
       var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
       var decimation = fftSize / document.getElementById("num-chan").value
-      var command = "cd " + recorderPath + " && sudo python2 " +
+      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py" +
         document.getElementById("acq-time").value + " " +
         document.getElementById("sample-rate").value + " " +
         document.getElementById("frequency").value + " " +
@@ -110,14 +110,13 @@ function countdown(){
     if(controlData()){
       var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
       var decimation = fftSize / document.getElementById("num-chan").value
-      var command = "cd " + recorderPath + " && sudo python2 " +
+      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py" +
         document.getElementById("acq-time").value + " " +
         document.getElementById("sample-rate").value + " " +
         document.getElementById("frequency").value + " " +
         document.getElementById("rf-gain").value + " " +
         document.getElementById("if-gain").value + " " +
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
-        document.getElementById("acq-time").value + " " +
         document.getElementById("dig-gain").value + " " +
         document.getElementById("filename").value;
       exec(command, function(error, stdout, stderr){
