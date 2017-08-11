@@ -6,8 +6,6 @@ var countdownSeconds = 0;
 var intervalId = "";
 var countdownIsRunning = false;
 var recorderPath = "";
-var processId = null;
-var processIsRunning = false;
 
 
 fs.readFile("default.conf.xml", "utf-8", function(err, data){
@@ -71,59 +69,51 @@ function controlData(){
 }
 
 function start(){
-  if(processIsRunning){
-    processId.kill();
-    document.getElementsByClassName("start-button")[0].value = "Start";
-  }
-  else{
-    if(countdownIsRunning){
-      clearInterval(intervalId);
-      document.getElementsByClassName("start-button")[0].value = "Start";
-      countdownIsRunning = false;
-    }else{
-      if(!controlData()){
-        return false;
-      }
-      if(document.getElementById("start-now").checked){
-        var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
-        var decimation = fftSize / document.getElementById("num-chan").value
-        var command = "cd " + recorderPath + " && sudo python2 PulsChan.py " +
-          document.getElementById("acq-time").value + " " +
-          document.getElementById("sample-rate").value + " " +
-          document.getElementById("frequency").value + " " +
-          document.getElementById("rf-gain").value + " " +
-          document.getElementById("if-gain").value + " " +
-          document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
-          document.getElementById("dig-gain").value + " " +
-          document.getElementById("filename").value;
-        processId = exec(command, function(error, stdout, stderr){
-          document.getElementsByClassName("start-button")[0].value = "Start";
-          processIsRunning = false;
-          console.log(stdout);
-          if(stderr)  alert("ERROR: " + stderr);
-        });
-        processIsRunning = true;
-        document.getElementsByClassName("start-button")[0].value = "Clean process kill";
-      }
-      else{
-        countdownSeconds = parseInt((Date.parse(document.getElementById("start-time").value) - Date.parse(new Date().toLocaleString()))/1000);
-        console.log(countdownSeconds);
-        if(countdownSeconds >= 0){
-          intervalId = setInterval(countdown, 1000);
-          document.getElementsByClassName("start-button")[0].value = "stop";
-          countdownIsRunning = true;
-        }else{
-          alert("wrong start time!");
-        }
+  if(countdownIsRunning){
+    clearInterval(intervalId);
+    document.getElementsByClassName("start-button")[0].value = "start";
+    countdownIsRunning = false;
+  }else{
+    if(!controlData()){
+      return false;
+    }
+
+    if(document.getElementById("start-now").checked){
+      var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
+      var decimation = fftSize / document.getElementById("num-chan").value
+      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py " +
+        document.getElementById("acq-time").value + " " +
+        document.getElementById("sample-rate").value + " " +
+        document.getElementById("frequency").value + " " +
+        document.getElementById("rf-gain").value + " " +
+        document.getElementById("if-gain").value + " " +
+        document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
+        document.getElementById("dig-gain").value + " " +
+        document.getElementById("filename").value;
+      exec(command, function(error, stdout, stderr){
+        console.log(stdout);
+        if(stderr)  alert("ERROR: " + stderr);
+      });
+    }
+    else{
+      countdownSeconds = parseInt((Date.parse(document.getElementById("start-time").value) - Date.parse(new Date().toLocaleString()))/1000);
+      console.log(countdownSeconds);
+      if(countdownSeconds >= 0){
+        intervalId = setInterval(countdown, 1000);
+        document.getElementsByClassName("start-button")[0].value = "stop";
+        countdownIsRunning = true;
+      }else{
+        alert("wrong start time!");
       }
     }
   }
+
 }
 
 function countdown(){
   if(countdownSeconds == 0){
     clearInterval(intervalId);
-    document.getElementsByClassName("start-button")[0].value = "Start";
+    document.getElementsByClassName("start-button")[0].value = "start";
     countdownIsRunning = false;
     if(controlData()){
       var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
@@ -137,24 +127,21 @@ function countdown(){
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
         document.getElementById("filename").value;
-      processId = exec(command, function(error, stdout, stderr){
-        document.getElementsByClassName("start-button")[0].value = "Start";
-        processIsRunning = false;
+      exec(command, function(error, stdout, stderr){
         console.log(stdout);
         if(stderr)  alert("ERROR: " + stderr);
       });
-      processIsRunning = true;
-      document.getElementsByClassName("start-button")[0].value = "Clean process kill";
     }
   }
   if(!controlData()){
     clearInterval(intervalId);
-    document.getElementsByClassName("start-button")[0].value = "Start";
+    document.getElementsByClassName("start-button")[0].value = "start";
     countdownIsRunning = false;
   }
+  console.log(countdownSeconds);
   var hours = Math.floor(countdownSeconds / 3600);
   var minutes = Math.floor((countdownSeconds - (hours*3600))/60);
   var seconds = Math.floor((countdownSeconds -(hours*3600) -(minutes*60)));
-  document.getElementById("countdown").innerHTML = hours + ":" + minutes + ":" + seconds;
+  document.getElementById("countdown").innerHTML = hours + ":" + ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
   countdownSeconds--;
 }
