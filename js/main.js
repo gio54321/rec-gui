@@ -6,6 +6,8 @@ var countdownSeconds = 0;
 var intervalId = "";
 var countdownIsRunning = false;
 var recorderPath = "";
+var processId = null;
+var processIsRunning = false;
 
 
 fs.readFile("default.conf.xml", "utf-8", function(err, data){
@@ -90,20 +92,25 @@ function start(){
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
         document.getElementById("filename").value;
-      exec(command, function(error, stdout, stderr){
+      processId = exec(command, function(error, stdout, stderr){
+        processIsRunning = false;
         console.log(stdout);
+        if(stderr)  alert("ERROR: " + stderr);
       });
+      processIsRunning = true;
     }
     else{
       countdownSeconds = parseInt((Date.parse(document.getElementById("start-time").value) - Date.parse(new Date().toLocaleString()))/1000);
-      if(countdownSeconds <=0){
+      console.log(countdownSeconds);
+      if(countdownSeconds >= 0){
         intervalId = setInterval(countdown, 1000);
         document.getElementsByClassName("start-button")[0].value = "stop";
         countdownIsRunning = true;
-      }else{alert("wrong start time!")}
+      }else{
+        alert("wrong start time!");
+      }
     }
   }
-
 }
 
 function countdown(){
@@ -123,9 +130,12 @@ function countdown(){
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
         document.getElementById("filename").value;
-      exec(command, function(error, stdout, stderr){
+      processId = exec(command, function(error, stdout, stderr){
+        processIsRunning = false;
         console.log(stdout);
+        if(stderr)  alert("ERROR: " + stderr);
       });
+      processIsRunning = true;
     }
   }
   if(!controlData()){
