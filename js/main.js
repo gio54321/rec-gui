@@ -24,6 +24,7 @@ fs.readFile("default.conf.xml", "utf-8", function(err, data){
   document.getElementById("if-gain").value = xmlDoc.getElementsByTagName("if-gain")[0].childNodes[0].nodeValue;
   document.getElementById("bb-gain").value = xmlDoc.getElementsByTagName("bb-gain")[0].childNodes[0].nodeValue;
   document.getElementById("dig-gain").value = xmlDoc.getElementsByTagName("dig-gain")[0].childNodes[0].nodeValue;
+  document.getElementById("filename").value = xmlDoc.getElementsByTagName("filename")[0].childNodes[0].nodeValue;
   document.getElementById("start-now").checked = (xmlDoc.getElementsByTagName("start-now")[0].childNodes[0].nodeValue == "true")? true : false;
   document.getElementById("start-time").value = new Date().toLocaleString();
 
