@@ -8,7 +8,7 @@
   <if-gain>12</if-gain>
   <bb-gain>0</bb-gain>
   <dig-gain>2</dig-gain>
-  <filename></filename>
+  <filename>/media/ubuntu/Windows/pulsar-data/filename.bin</filename>
   <start-now>true</start-now>
   <start-time></start-time>
 
