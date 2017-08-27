@@ -119,7 +119,7 @@ function countdown(){
     if(controlData()){
       var fftSize = document.getElementById("sample-rate").value / document.getElementById("sr-time-series").value;
       var decimation = fftSize / document.getElementById("num-chan").value
-      var command = "cd " + recorderPath + " && sudo python2 PulsChan.py " +
+       var command = '--working-directory="'+ recorderPath + '" -x bash -c "sudo python2 PulsChan.py ' +
         document.getElementById("acq-time").value + " " +
         document.getElementById("sample-rate").value + " " +
         document.getElementById("frequency").value + " " +
@@ -127,8 +127,8 @@ function countdown(){
         document.getElementById("if-gain").value + " " +
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
-        document.getElementById("filename").value;
-      exec('gnome-terminal -x sh -e "' + command + '"', function(error, stdout, stderr){
+        document.getElementById("filename").value + '"';
+      exec('gnome-terminal ' + command, function(error, stdout, stderr){
         console.log(stdout);
         if(stderr)  alert("ERROR: " + stderr);
       });
