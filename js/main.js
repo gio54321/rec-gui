@@ -91,7 +91,7 @@ function start(){
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
         document.getElementById("filename").value;
-      exec(command, function(error, stdout, stderr){
+      exec('gnome-terminal -e "' + command + '"', function(error, stdout, stderr){
         console.log(stdout);
         if(stderr)  alert("ERROR: " + stderr);
       });
@@ -128,7 +128,7 @@ function countdown(){
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
         document.getElementById("filename").value;
-      exec(command, function(error, stdout, stderr){
+      exec('gnome-terminal -e "' + command + '"', function(error, stdout, stderr){
         console.log(stdout);
         if(stderr)  alert("ERROR: " + stderr);
       });
