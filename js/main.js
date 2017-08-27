@@ -128,7 +128,8 @@ function countdown(){
         document.getElementById("if-gain").value + " " +
         document.getElementById("bb-gain").value + " " + fftSize + " " + decimation + " " +
         document.getElementById("dig-gain").value + " " +
-        document.getElementById("filename").value + '"';
+        document.getElementById("filename").value + 
+        " | sudo tee > " + recorderPath + "/REC_GUI/Last_log.txt" + '"';
       exec('gnome-terminal ' + command, function(error, stdout, stderr){
         console.log(stdout);
         if(stderr)  alert("ERROR: " + stderr);
