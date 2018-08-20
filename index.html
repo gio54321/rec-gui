@@ -1,12 +1,11 @@
 
 <html>
   <head>
-    <script src="js/jquery.min.js" language="javascript" type="text/javascript"></script>
     <script src="js/main.js" language="javascript" type="text/javascript"></script>
-    <link rel="stylesheet" href="css/style.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
   </head>
   <body>
-    <div class="container">   
+    <div class="container">
       <input id="acq-time" type="number" min="0" step="60"/>
       <div class="input-text">ACQ Time (s)</div>
       <select id="sample-rate">
@@ -51,6 +50,12 @@
       <div class="input-text">Start now</div>
       <input id="start-time" type="text"/>
       <div class="input-text">Start time</div>
+      <input id="repeat" type="checkbox"/>
+      <div class="input-text">Repeat recording</div>
+      <input id="launch-script" type="checkbox"/>
+      <div class="input-text">Launch script</div>
+      <input id="processing-script" type="text"/>
+      <div class="input-text">Processing script</div>
       <input type="button" onclick="start()" value="Start" class="start-button"/>
       <div class="input-text"></div>
       <div id="countdown">00:00:00</div>

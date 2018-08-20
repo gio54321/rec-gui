@@ -8,9 +8,11 @@
   <if-gain>12</if-gain>
   <bb-gain>0</bb-gain>
   <dig-gain>2</dig-gain>
-  <filename>/media/ubuntu/Windows/pulsar-data/filename.bin</filename>
+  <filename>/usr/local/Pulsar/Pulsar-data/filename.bin</filename>
   <start-now>true</start-now>
-  <start-time></start-time>
+  <repeat>false</repeat>
+  <launch-script>false</launch-script>
+  <processing-script>./elaboration</processing-script>
 
-  <recorder-path>/</recorder-path>
+  <recorder-path>/usr/local/Pulsar/Recording</recorder-path>
 </default>
